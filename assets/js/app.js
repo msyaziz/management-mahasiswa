@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.querySelector('.mobile-menu');
 
     if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener('click', () => {
+        hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             mobileMenu.classList.toggle('active');
             const icon = hamburgerBtn.querySelector('i');
             if (mobileMenu.classList.contains('active')) {
@@ -41,6 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             submitForm();
+        });
+    }
+
+    const editForm = document.getElementById('edit-mahasiswa-form');
+    if (editForm) {
+        editForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitEditForm();
         });
     }
 });
@@ -83,31 +92,34 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Simulasi Submit Form
+// Simulasi Submit Form Tambah
 function submitForm() {
-    // Validasi HTML5 dasar
     const form = document.getElementById('mahasiswa-form');
-    if (!form.checkValidity()) {
+    if (form && !form.checkValidity()) {
         form.reportValidity();
         return;
     }
     
-    // Tutup Modal
     closeModal('form-modal');
-    
-    // Tampilkan Alert Sukses
     showToast('Data mahasiswa berhasil disimpan!', 'success');
-    
-    // Reset Form
-    form.reset();
+    if (form) form.reset();
+}
+
+// Simulasi Submit Form Edit/Update
+function submitEditForm() {
+    const form = document.getElementById('edit-mahasiswa-form');
+    if (form && !form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    closeModal('edit-modal');
+    showToast('Data mahasiswa berhasil diperbarui!', 'info');
 }
 
 // Simulasi Konfirmasi Hapus
 function confirmDelete() {
-    // Tutup Modal
     closeModal('delete-modal');
-    
-    // Tampilkan Alert
     showToast('Data mahasiswa berhasil dihapus!', 'success');
 }
 
@@ -130,7 +142,6 @@ function showToast(message, type = 'success') {
 
     container.appendChild(toast);
 
-    // Hapus toast setelah 3 detik
     setTimeout(() => {
         toast.style.animation = 'fadeOut 0.3s forwards';
         setTimeout(() => {

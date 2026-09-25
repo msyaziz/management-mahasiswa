@@ -27,7 +27,7 @@
         <div class="nav-menu">
             <a href="#beranda" class="nav-link">Beranda</a>
             <a href="#data-mahasiswa" class="nav-link">Data Mahasiswa</a>
-            <a href="#tentang" class="nav-link">Tentang</a>
+            <a href="#tentang" class="nav-link">Cara Kerja</a>
         </div>
         <button class="neo-btn btn-primary" onclick="openModal('form-modal')">
             <i class="ph-bold ph-plus"></i> Tambah Mahasiswa
@@ -36,17 +36,17 @@
         <button class="hamburger-btn">
             <i class="ph-bold ph-list"></i>
         </button>
-    </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <a href="#beranda" class="nav-link">Beranda</a>
-        <a href="#data-mahasiswa" class="nav-link">Data Mahasiswa</a>
-        <a href="#tentang" class="nav-link">Tentang</a>
-        <button class="neo-btn btn-primary" onclick="openModal('form-modal'); closeMobileMenu()">
-            <i class="ph-bold ph-plus"></i> Tambah Mahasiswa
-        </button>
-    </div>
+        <!-- Mobile Menu inside Navbar -->
+        <div class="mobile-menu">
+            <a href="#beranda" class="nav-link" onclick="closeMobileMenu()">Beranda</a>
+            <a href="#data-mahasiswa" class="nav-link" onclick="closeMobileMenu()">Data Mahasiswa</a>
+            <a href="#tentang" class="nav-link" onclick="closeMobileMenu()">Cara Kerja</a>
+            <button class="neo-btn btn-primary" onclick="openModal('form-modal'); closeMobileMenu()">
+                <i class="ph-bold ph-plus"></i> Tambah Mahasiswa
+            </button>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <header class="neo-hero" id="beranda">
@@ -60,9 +60,6 @@
             <div class="hero-actions">
                 <a href="#data-mahasiswa" class="neo-btn btn-primary btn-large">
                     Kelola Data Sekarang <i class="ph-bold ph-arrow-right"></i>
-                </a>
-                <a href="#tentang" class="neo-btn btn-white btn-large">
-                    Cara Kerja
                 </a>
             </div>
         </div>
@@ -169,7 +166,7 @@
                         <td>2025</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="neo-btn-icon btn-yellow" onclick="openModal('form-modal')" title="Edit">
+                                <button class="neo-btn-icon btn-yellow" onclick="openModal('edit-modal')" title="Edit / Update">
                                     <i class="ph-bold ph-pencil-simple"></i>
                                 </button>
                                 <button class="neo-btn-icon btn-pink" onclick="openModal('delete-modal')" title="Hapus">
@@ -187,7 +184,7 @@
                         <td>2025</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="neo-btn-icon btn-yellow" onclick="openModal('form-modal')" title="Edit">
+                                <button class="neo-btn-icon btn-yellow" onclick="openModal('edit-modal')" title="Edit / Update">
                                     <i class="ph-bold ph-pencil-simple"></i>
                                 </button>
                                 <button class="neo-btn-icon btn-pink" onclick="openModal('delete-modal')" title="Hapus">
@@ -196,13 +193,12 @@
                             </div>
                         </td>
                     </tr>
-                    <!-- More rows can be populated by JS later -->
                 </tbody>
             </table>
         </div>
     </main>
 
-    <!-- Modal Form Tambah/Edit -->
+    <!-- Modal Form Tambah Mahasiswa -->
     <div class="neo-modal-overlay" id="form-modal">
         <div class="neo-modal-content">
             <div class="modal-header">
@@ -262,6 +258,68 @@
             <div class="modal-footer">
                 <button class="neo-btn btn-white" onclick="closeModal('form-modal')">Batal</button>
                 <button class="neo-btn btn-primary" onclick="submitForm()">Simpan Data</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form Update/Edit Mahasiswa -->
+    <div class="neo-modal-overlay" id="edit-modal">
+        <div class="neo-modal-content">
+            <div class="modal-header bg-yellow">
+                <h3>UPDATE MAHASISWA</h3>
+                <button class="close-btn" onclick="closeModal('edit-modal')">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-mahasiswa-form">
+                    <div class="form-group">
+                        <label class="neo-label">NPM</label>
+                        <input type="text" class="neo-input" value="25081010121" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="neo-label">Nama Lengkap</label>
+                        <input type="text" class="neo-input" value="Raihan Firmansyah" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="neo-label">Jenis Kelamin</label>
+                            <select class="neo-select" required>
+                                <option value="L" selected>Laki-laki (L)</option>
+                                <option value="P">Perempuan (P)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="neo-label">Agama</label>
+                            <select class="neo-select" required>
+                                <option value="I" selected>Islam</option>
+                                <option value="P">Protestan/Kristen</option>
+                                <option value="K">Katolik</option>
+                                <option value="B">Buddha</option>
+                                <option value="H">Hindu</option>
+                                <option value="C">Konghucu</option>
+                                <option value="A">Lainnya</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="neo-label">Program Studi</label>
+                            <input type="text" class="neo-input" value="Informatika" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="neo-label">Angkatan</label>
+                            <input type="number" class="neo-input" value="2025" required min="2000" max="2100">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="neo-btn btn-white" onclick="closeModal('edit-modal')">Batal</button>
+                <button class="neo-btn btn-yellow" onclick="submitEditForm()">Update Data</button>
             </div>
         </div>
     </div>

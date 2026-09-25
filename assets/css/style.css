@@ -217,7 +217,7 @@ a {
     background-color: var(--sky-blue);
     border-bottom: var(--border-thick);
     position: absolute;
-    top: 73px;
+    top: 100%;
     left: 0;
     width: 100%;
     z-index: 99;
@@ -231,8 +231,8 @@ a {
 /* --- Hero Section --- */
 .neo-hero {
     position: relative;
-    padding: 100px 5%;
-    min-height: 80vh;
+    padding: 60px 5%;
+    min-height: calc(100vh - 73px);
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -698,36 +698,36 @@ a {
 .neo-footer {
     background-color: var(--black);
     color: var(--white);
-    padding: 40px 5%;
-    border-top: 5px solid var(--hot-pink);
+    padding: 20px 5%;
+    border-top: 4px solid var(--hot-pink);
 }
 
 .footer-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
     text-align: center;
 }
 
 .footer-brand {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 900;
     color: var(--mint-green);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 /* --- Responsivitas --- */
 @media (max-width: 1024px) {
     .hero-title { font-size: 3.5rem; }
-    .hero-decor { display: none; } /* Hide decor on smaller screens */
+    .hero-decor { display: none; }
     .steps-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-    .nav-menu, .neo-navbar .neo-btn { display: none; }
+    .nav-menu, .neo-navbar > .neo-btn { display: none; }
     .hamburger-btn { display: block; }
     
     .hero-title { font-size: 2.5rem; }
