@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Mahasiswa</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="neo-navbar">
+        <div class="nav-brand">
+            <i class="ph-bold ph-student"></i>
+            <span>SIMAWA</span>
+        </div>
+        <div class="nav-menu">
+            <a href="#beranda" class="nav-link">Beranda</a>
+            <a href="#data-mahasiswa" class="nav-link">Data Mahasiswa</a>
+            <a href="#tentang" class="nav-link">Tentang</a>
+        </div>
+        <button class="neo-btn btn-primary" onclick="openModal('form-modal')">
+            <i class="ph-bold ph-plus"></i> Tambah Mahasiswa
+        </button>
+        <!-- Hamburger Menu for Mobile -->
+        <button class="hamburger-btn">
+            <i class="ph-bold ph-list"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="#beranda" class="nav-link">Beranda</a>
+        <a href="#data-mahasiswa" class="nav-link">Data Mahasiswa</a>
+        <a href="#tentang" class="nav-link">Tentang</a>
+        <button class="neo-btn btn-primary" onclick="openModal('form-modal'); closeMobileMenu()">
+            <i class="ph-bold ph-plus"></i> Tambah Mahasiswa
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="neo-hero" id="beranda">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                KELOLA DATA <span class="highlight highlight-mint">MAHASISWA</span> LEBIH MUDAH
+            </h1>
+            <p class="hero-desc">
+                Sistem Manajemen Database Mahasiswa dengan antarmuka yang modern, cepat, dan mudah digunakan. Kelola data akademik tanpa pusing.
+            </p>
+            <div class="hero-actions">
+                <a href="#data-mahasiswa" class="neo-btn btn-primary btn-large">
+                    Kelola Data Sekarang <i class="ph-bold ph-arrow-right"></i>
+                </a>
+                <a href="#tentang" class="neo-btn btn-white btn-large">
+                    Cara Kerja
+                </a>
+            </div>
+        </div>
+        <div class="hero-decor">
+            <div class="decor-circle bg-pink"></div>
+            <div class="decor-box bg-yellow"></div>
+            <div class="decor-star bg-blue">
+                <i class="ph-fill ph-star"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cara Kerja Section -->
+    <section class="neo-steps-section" id="tentang">
+        <div class="section-header">
+            <h2><span class="highlight highlight-pink">CARA</span> KERJA</h2>
+            <p>Tiga langkah mudah mengelola data mahasiswa</p>
+        </div>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number bg-yellow">1</div>
+                <h3>Tambah Data</h3>
+                <p>Masukkan data mahasiswa baru melalui form yang telah disediakan dengan validasi instan.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number bg-pink">2</div>
+                <h3>Kelola Data</h3>
+                <p>Ubah, perbarui, atau hapus data yang sudah ada kapan saja dengan cepat dan mudah.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number bg-mint">3</div>
+                <h3>Pantau Data</h3>
+                <p>Lihat seluruh data dalam tabel interaktif dengan fitur pencarian dan filter cerdas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <main class="neo-dashboard" id="data-mahasiswa">
+        <div class="dashboard-header">
+            <h2>DATABASE <span class="highlight highlight-blue">MAHASISWA</span></h2>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <i class="ph-fill ph-users bg-pink stat-icon"></i>
+                    <div class="stat-info">
+                        <span class="stat-value">124</span>
+                        <span class="stat-label">Total Mahasiswa</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="ph-fill ph-graduation-cap bg-mint stat-icon"></i>
+                    <div class="stat-info">
+                        <span class="stat-value">5</span>
+                        <span class="stat-label">Program Studi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-controls">
+            <div class="search-box neo-input-group">
+                <i class="ph-bold ph-magnifying-glass"></i>
+                <input type="text" class="neo-input" placeholder="Cari NPM atau Nama...">
+            </div>
+            
+            <div class="filter-group">
+                <select class="neo-select">
+                    <option value="">Semua Program Studi</option>
+                    <option value="Informatika">Informatika</option>
+                    <option value="Sistem Informasi">Sistem Informasi</option>
+                    <option value="Data Science">Data Science</option>
+                </select>
+                <select class="neo-select">
+                    <option value="">Semua Angkatan</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="neo-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>NPM</th>
+                        <th>Nama Mahasiswa</th>
+                        <th>L/P</th>
+                        <th>Program Studi</th>
+                        <th>Angkatan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>25081010121</td>
+                        <td>Raihan Firmansyah</td>
+                        <td><span class="badge badge-l">L</span></td>
+                        <td>Informatika</td>
+                        <td>2025</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="neo-btn-icon btn-yellow" onclick="openModal('form-modal')" title="Edit">
+                                    <i class="ph-bold ph-pencil-simple"></i>
+                                </button>
+                                <button class="neo-btn-icon btn-pink" onclick="openModal('delete-modal')" title="Hapus">
+                                    <i class="ph-bold ph-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>25081010122</td>
+                        <td>Siti Aminah</td>
+                        <td><span class="badge badge-p">P</span></td>
+                        <td>Sistem Informasi</td>
+                        <td>2025</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="neo-btn-icon btn-yellow" onclick="openModal('form-modal')" title="Edit">
+                                    <i class="ph-bold ph-pencil-simple"></i>
+                                </button>
+                                <button class="neo-btn-icon btn-pink" onclick="openModal('delete-modal')" title="Hapus">
+                                    <i class="ph-bold ph-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- More rows can be populated by JS later -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal Form Tambah/Edit -->
+    <div class="neo-modal-overlay" id="form-modal">
+        <div class="neo-modal-content">
+            <div class="modal-header">
+                <h3>TAMBAH MAHASISWA</h3>
+                <button class="close-btn" onclick="closeModal('form-modal')">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="mahasiswa-form">
+                    <div class="form-group">
+                        <label class="neo-label">NPM</label>
+                        <input type="text" class="neo-input" placeholder="Masukkan NPM" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="neo-label">Nama Lengkap</label>
+                        <input type="text" class="neo-input" placeholder="Masukkan nama lengkap" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="neo-label">Jenis Kelamin</label>
+                            <select class="neo-select" required>
+                                <option value="" disabled selected>Pilih L/P</option>
+                                <option value="L">Laki-laki (L)</option>
+                                <option value="P">Perempuan (P)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="neo-label">Agama</label>
+                            <select class="neo-select" required>
+                                <option value="" disabled selected>Pilih Agama</option>
+                                <option value="I">Islam</option>
+                                <option value="P">Protestan/Kristen</option>
+                                <option value="K">Katolik</option>
+                                <option value="B">Buddha</option>
+                                <option value="H">Hindu</option>
+                                <option value="C">Konghucu</option>
+                                <option value="A">Lainnya</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="neo-label">Program Studi</label>
+                            <input type="text" class="neo-input" placeholder="Contoh: Informatika" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="neo-label">Angkatan</label>
+                            <input type="number" class="neo-input" placeholder="Contoh: 2026" required min="2000" max="2100">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="neo-btn btn-white" onclick="closeModal('form-modal')">Batal</button>
+                <button class="neo-btn btn-primary" onclick="submitForm()">Simpan Data</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Hapus -->
+    <div class="neo-modal-overlay" id="delete-modal">
+        <div class="neo-modal-content modal-sm">
+            <div class="modal-header">
+                <h3>HAPUS DATA?</h3>
+                <button class="close-btn" onclick="closeModal('delete-modal')">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <i class="ph-duotone ph-warning-circle text-pink" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+                <p>Data mahasiswa <strong>Raihan Firmansyah (25081010121)</strong> akan dihapus permanen. Anda yakin?</p>
+            </div>
+            <div class="modal-footer justify-center">
+                <button class="neo-btn btn-white" onclick="closeModal('delete-modal')">Batal</button>
+                <button class="neo-btn btn-pink" onclick="confirmDelete()">Ya, Hapus!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container Notifikasi/Alert -->
+    <div class="neo-toast-container" id="toast-container">
+        <!-- Toast dinamis akan muncul di sini via JS -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="neo-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <i class="ph-bold ph-student"></i> SIMAWA
+            </div>
+            <p>&copy; 2026 Sistem Manajemen Database Mahasiswa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
