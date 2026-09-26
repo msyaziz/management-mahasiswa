@@ -774,3 +774,20 @@ a {
     }
     .action-buttons { justify-content: flex-end; }
 }
+
+/* --- Spin & Disabled Utilities --- */
+.ph-spin {
+    animation: neo-spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes neo-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed !important;
+    transform: none !important;
+}

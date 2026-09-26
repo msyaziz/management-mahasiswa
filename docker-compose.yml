@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:8.4-apache
+    container_name: mahasiswa_php
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    command: >
+      bash -c "docker-php-ext-install mysqli pdo pdo_mysql && apache2-foreground"
+
+  db:
+    image: mariadb:latest
+    container_name: mahasiswa_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mahasiswasw
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

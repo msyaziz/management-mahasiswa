@@ -107,14 +107,14 @@
                 <div class="stat-card">
                     <i class="ph-fill ph-users bg-pink stat-icon"></i>
                     <div class="stat-info">
-                        <span class="stat-value">124</span>
+                        <span class="stat-value" id="stat-total-mahasiswa">0</span>
                         <span class="stat-label">Total Mahasiswa</span>
                     </div>
                 </div>
                 <div class="stat-card">
                     <i class="ph-fill ph-graduation-cap bg-mint stat-icon"></i>
                     <div class="stat-info">
-                        <span class="stat-value">5</span>
+                        <span class="stat-value" id="stat-total-prodi">0</span>
                         <span class="stat-label">Program Studi</span>
                     </div>
                 </div>
@@ -124,21 +124,15 @@
         <div class="dashboard-controls">
             <div class="search-box neo-input-group">
                 <i class="ph-bold ph-magnifying-glass"></i>
-                <input type="text" class="neo-input" placeholder="Cari NPM atau Nama...">
+                <input type="text" id="search-input" class="neo-input" placeholder="Cari NPM atau Nama...">
             </div>
             
             <div class="filter-group">
-                <select class="neo-select">
+                <select id="filter-prodi" class="neo-select">
                     <option value="">Semua Program Studi</option>
-                    <option value="Informatika">Informatika</option>
-                    <option value="Sistem Informasi">Sistem Informasi</option>
-                    <option value="Data Science">Data Science</option>
                 </select>
-                <select class="neo-select">
+                <select id="filter-angkatan" class="neo-select">
                     <option value="">Semua Angkatan</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
                 </select>
             </div>
         </div>
@@ -147,50 +141,20 @@
             <table class="neo-table">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th style="width: 60px;">No</th>
                         <th>NPM</th>
                         <th>Nama Mahasiswa</th>
                         <th>L/P</th>
                         <th>Program Studi</th>
                         <th>Angkatan</th>
-                        <th>Aksi</th>
+                        <th>Agama</th>
+                        <th style="width: 120px;">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="mahasiswa-table-body">
                     <tr>
-                        <td>1</td>
-                        <td>25081010121</td>
-                        <td>Raihan Firmansyah</td>
-                        <td><span class="badge badge-l">L</span></td>
-                        <td>Informatika</td>
-                        <td>2025</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="neo-btn-icon btn-yellow" onclick="openModal('edit-modal')" title="Edit / Update">
-                                    <i class="ph-bold ph-pencil-simple"></i>
-                                </button>
-                                <button class="neo-btn-icon btn-pink" onclick="openModal('delete-modal')" title="Hapus">
-                                    <i class="ph-bold ph-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>25081010122</td>
-                        <td>Siti Aminah</td>
-                        <td><span class="badge badge-p">P</span></td>
-                        <td>Sistem Informasi</td>
-                        <td>2025</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="neo-btn-icon btn-yellow" onclick="openModal('edit-modal')" title="Edit / Update">
-                                    <i class="ph-bold ph-pencil-simple"></i>
-                                </button>
-                                <button class="neo-btn-icon btn-pink" onclick="openModal('delete-modal')" title="Hapus">
-                                    <i class="ph-bold ph-trash"></i>
-                                </button>
-                            </div>
+                        <td colspan="8" class="text-center" style="padding: 30px;">
+                            <i class="ph-bold ph-spinner ph-spin" style="font-size: 24px;"></i> Memuat data mahasiswa...
                         </td>
                     </tr>
                 </tbody>
@@ -210,54 +174,57 @@
             <div class="modal-body">
                 <form id="mahasiswa-form">
                     <div class="form-group">
-                        <label class="neo-label">NPM</label>
-                        <input type="text" class="neo-input" placeholder="Masukkan NPM" required>
+                        <label class="neo-label" for="add-npm">NPM</label>
+                        <input type="text" id="add-npm" name="npm" class="neo-input" placeholder="Contoh: 25081010121" required maxlength="20">
                     </div>
                     
                     <div class="form-group">
-                        <label class="neo-label">Nama Lengkap</label>
-                        <input type="text" class="neo-input" placeholder="Masukkan nama lengkap" required>
+                        <label class="neo-label" for="add-nama">Nama Lengkap</label>
+                        <input type="text" id="add-nama" name="nama_mahasiswa" class="neo-input" placeholder="Masukkan nama lengkap" required maxlength="100">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="neo-label">Jenis Kelamin</label>
-                            <select class="neo-select" required>
+                            <label class="neo-label" for="add-jk">Jenis Kelamin</label>
+                            <select id="add-jk" name="jenis_kelamin" class="neo-select" required>
                                 <option value="" disabled selected>Pilih L/P</option>
                                 <option value="L">Laki-laki (L)</option>
                                 <option value="P">Perempuan (P)</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="neo-label">Agama</label>
-                            <select class="neo-select" required>
+                            <label class="neo-label" for="add-agama">Agama</label>
+                            <select id="add-agama" name="agama" class="neo-select" required>
                                 <option value="" disabled selected>Pilih Agama</option>
-                                <option value="I">Islam</option>
-                                <option value="P">Protestan/Kristen</option>
-                                <option value="K">Katolik</option>
-                                <option value="B">Buddha</option>
-                                <option value="H">Hindu</option>
-                                <option value="C">Konghucu</option>
-                                <option value="A">Lainnya</option>
+                                <option value="I">Islam (I)</option>
+                                <option value="P">Kristen/Protestan (P)</option>
+                                <option value="K">Katolik (K)</option>
+                                <option value="B">Buddha (B)</option>
+                                <option value="H">Hindu (H)</option>
+                                <option value="C">Konghucu (C)</option>
+                                <option value="A">Lainnya (A)</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="neo-label">Program Studi</label>
-                            <input type="text" class="neo-input" placeholder="Contoh: Informatika" required>
+                            <label class="neo-label" for="add-prodi">Program Studi</label>
+                            <input type="text" id="add-prodi" name="program_studi" class="neo-input" placeholder="Contoh: Informatika" required maxlength="100">
                         </div>
                         <div class="form-group">
-                            <label class="neo-label">Angkatan</label>
-                            <input type="number" class="neo-input" placeholder="Contoh: 2026" required min="2000" max="2100">
+                            <label class="neo-label" for="add-angkatan">Angkatan</label>
+                            <input type="number" id="add-angkatan" name="angkatan" class="neo-input" placeholder="Contoh: 2026" required min="1990" max="2100">
                         </div>
                     </div>
+
+                    <div class="modal-footer" style="padding-left: 0; padding-right: 0; padding-bottom: 0;">
+                        <button type="button" class="neo-btn btn-white" onclick="closeModal('form-modal')">Batal</button>
+                        <button type="submit" class="neo-btn btn-primary" id="btn-save-add">
+                            <i class="ph-bold ph-floppy-disk"></i> Simpan Data
+                        </button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button class="neo-btn btn-white" onclick="closeModal('form-modal')">Batal</button>
-                <button class="neo-btn btn-primary" onclick="submitForm()">Simpan Data</button>
             </div>
         </div>
     </div>
@@ -273,53 +240,58 @@
             </div>
             <div class="modal-body">
                 <form id="edit-mahasiswa-form">
+                    <input type="hidden" id="edit-id" name="id_mahasiswa">
+
                     <div class="form-group">
-                        <label class="neo-label">NPM</label>
-                        <input type="text" class="neo-input" value="25081010121" required>
+                        <label class="neo-label" for="edit-npm">NPM</label>
+                        <input type="text" id="edit-npm" name="npm" class="neo-input" required maxlength="20">
                     </div>
                     
                     <div class="form-group">
-                        <label class="neo-label">Nama Lengkap</label>
-                        <input type="text" class="neo-input" value="Raihan Firmansyah" required>
+                        <label class="neo-label" for="edit-nama">Nama Lengkap</label>
+                        <input type="text" id="edit-nama" name="nama_mahasiswa" class="neo-input" required maxlength="100">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="neo-label">Jenis Kelamin</label>
-                            <select class="neo-select" required>
-                                <option value="L" selected>Laki-laki (L)</option>
+                            <label class="neo-label" for="edit-jk">Jenis Kelamin</label>
+                            <select id="edit-jk" name="jenis_kelamin" class="neo-select" required>
+                                <option value="L">Laki-laki (L)</option>
                                 <option value="P">Perempuan (P)</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="neo-label">Agama</label>
-                            <select class="neo-select" required>
-                                <option value="I" selected>Islam</option>
-                                <option value="P">Protestan/Kristen</option>
-                                <option value="K">Katolik</option>
-                                <option value="B">Buddha</option>
-                                <option value="H">Hindu</option>
-                                <option value="C">Konghucu</option>
-                                <option value="A">Lainnya</option>
+                            <label class="neo-label" for="edit-agama">Agama</label>
+                            <select id="edit-agama" name="agama" class="neo-select" required>
+                                <option value="I">Islam (I)</option>
+                                <option value="P">Kristen/Protestan (P)</option>
+                                <option value="K">Katolik (K)</option>
+                                <option value="B">Buddha (B)</option>
+                                <option value="H">Hindu (H)</option>
+                                <option value="C">Konghucu (C)</option>
+                                <option value="A">Lainnya (A)</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="neo-label">Program Studi</label>
-                            <input type="text" class="neo-input" value="Informatika" required>
+                            <label class="neo-label" for="edit-prodi">Program Studi</label>
+                            <input type="text" id="edit-prodi" name="program_studi" class="neo-input" required maxlength="100">
                         </div>
                         <div class="form-group">
-                            <label class="neo-label">Angkatan</label>
-                            <input type="number" class="neo-input" value="2025" required min="2000" max="2100">
+                            <label class="neo-label" for="edit-angkatan">Angkatan</label>
+                            <input type="number" id="edit-angkatan" name="angkatan" class="neo-input" required min="1990" max="2100">
                         </div>
                     </div>
+
+                    <div class="modal-footer" style="padding-left: 0; padding-right: 0; padding-bottom: 0;">
+                        <button type="button" class="neo-btn btn-white" onclick="closeModal('edit-modal')">Batal</button>
+                        <button type="submit" class="neo-btn btn-yellow" id="btn-save-edit">
+                            <i class="ph-bold ph-check"></i> Update Data
+                        </button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button class="neo-btn btn-white" onclick="closeModal('edit-modal')">Batal</button>
-                <button class="neo-btn btn-yellow" onclick="submitEditForm()">Update Data</button>
             </div>
         </div>
     </div>
@@ -334,20 +306,18 @@
                 </button>
             </div>
             <div class="modal-body text-center">
-                <i class="ph-duotone ph-warning-circle text-pink" style="font-size: 4rem; margin-bottom: 1rem;"></i>
-                <p>Data mahasiswa <strong>Raihan Firmansyah (25081010121)</strong> akan dihapus permanen. Anda yakin?</p>
+                <i class="ph-duotone ph-warning-circle text-pink" style="font-size: 4rem; margin-bottom: 1rem; display: block;"></i>
+                <p id="delete-confirm-text">Data mahasiswa akan dihapus permanen. Anda yakin?</p>
             </div>
             <div class="modal-footer justify-center">
                 <button class="neo-btn btn-white" onclick="closeModal('delete-modal')">Batal</button>
-                <button class="neo-btn btn-pink" onclick="confirmDelete()">Ya, Hapus!</button>
+                <button class="neo-btn btn-pink" id="btn-confirm-delete" onclick="confirmDelete()">Ya, Hapus!</button>
             </div>
         </div>
     </div>
 
     <!-- Container Notifikasi/Alert -->
-    <div class="neo-toast-container" id="toast-container">
-        <!-- Toast dinamis akan muncul di sini via JS -->
-    </div>
+    <div class="neo-toast-container" id="toast-container"></div>
 
     <!-- Footer -->
     <footer class="neo-footer">
