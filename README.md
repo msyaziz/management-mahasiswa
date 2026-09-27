@@ -10,8 +10,8 @@ Sistem web responsif bergaya **Neobrutalism** untuk mengelola data mahasiswa sec
 ## 🛠️ Teknologi yang Digunakan
 
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript.
-- **Backend:** PHP Native (versi 8.0+).
-- **Database:** MariaDB / MySQL.
+- **Backend:** PHP Native (versi 8.4).
+- **Database:** MariaDB.
 - **Environment (Opsional):** Docker & Docker Compose.
 
 ---
