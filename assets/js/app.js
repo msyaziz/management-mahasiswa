@@ -10,6 +10,9 @@ const API_BASE = 'api/';
 // Variabel state global
 let currentDeleteId = null;
 let searchDebounceTimer = null;
+let allStudentsData = [];
+let currentPage = 1;
+const itemsPerPage = 15;
 
 // Peta kode agama
 const AGAMA_MAP = {
@@ -123,8 +126,12 @@ async function loadMahasiswa(updateFilterOptions = false) {
                 populateFilterOptions(stats.prodi_list, stats.angkatan_list, prodiVal, angkatanVal);
             }
 
-            // Render Baris Tabel
-            renderTable(students);
+            // Simpan seluruh data mahasiswa dan reset ke halaman 1
+            allStudentsData = students;
+            currentPage = 1;
+
+            // Render Baris Tabel dan Navigasi Pagination
+            renderTablePaginated();
         } else {
             tableBody.innerHTML = `
                 <tr>
@@ -133,6 +140,8 @@ async function loadMahasiswa(updateFilterOptions = false) {
                     </td>
                 </tr>
             `;
+            const paginationContainer = document.getElementById('pagination-controls');
+            if (paginationContainer) paginationContainer.innerHTML = '';
         }
     } catch (err) {
         console.error('Fetch error:', err);
@@ -144,17 +153,22 @@ async function loadMahasiswa(updateFilterOptions = false) {
                 </td>
             </tr>
         `;
+        const paginationContainer = document.getElementById('pagination-controls');
+        if (paginationContainer) paginationContainer.innerHTML = '';
     }
 }
 
 /**
- * Render array mahasiswa ke dalam tabel HTML
+ * Render tabel dengan pagination (maksimal 15 baris per halaman)
  */
-function renderTable(students) {
+function renderTablePaginated() {
     const tableBody = document.getElementById('mahasiswa-table-body');
+    const paginationContainer = document.getElementById('pagination-controls');
     if (!tableBody) return;
 
-    if (students.length === 0) {
+    const totalItems = allStudentsData.length;
+
+    if (totalItems === 0) {
         tableBody.innerHTML = `
             <tr>
                 <td colspan="8" class="text-center" style="padding: 30px; font-weight: 600;">
@@ -162,11 +176,25 @@ function renderTable(students) {
                 </td>
             </tr>
         `;
+        if (paginationContainer) paginationContainer.innerHTML = '';
         return;
     }
 
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    if (currentPage > totalPages) {
+        currentPage = totalPages;
+    }
+    if (currentPage < 1) {
+        currentPage = 1;
+    }
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+    const pagedStudents = allStudentsData.slice(startIndex, endIndex);
+
     let rowsHtml = '';
-    students.forEach((mhs, index) => {
+    pagedStudents.forEach((mhs, i) => {
+        const globalIndex = startIndex + i + 1;
         const isLaki = mhs.jenis_kelamin === 'L';
         const badgeGender = isLaki ? 'badge-l' : 'badge-p';
         const labelGender = isLaki ? 'L' : 'P';
@@ -179,7 +207,7 @@ function renderTable(students) {
 
         rowsHtml += `
             <tr>
-                <td data-label="No">${index + 1}</td>
+                <td data-label="No">${globalIndex}</td>
                 <td data-label="NPM"><strong>${safeNPM}</strong></td>
                 <td data-label="Nama Mahasiswa">${safeNama}</td>
                 <td data-label="L/P"><span class="badge ${badgeGender}">${labelGender}</span></td>
@@ -201,6 +229,77 @@ function renderTable(students) {
     });
 
     tableBody.innerHTML = rowsHtml;
+    renderPaginationControls(totalItems, totalPages, startIndex + 1, endIndex);
+}
+
+/**
+ * Render tombol kontrol pagination
+ */
+function renderPaginationControls(totalItems, totalPages, startItem, endItem) {
+    const paginationContainer = document.getElementById('pagination-controls');
+    if (!paginationContainer) return;
+
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = `
+            <div class="pagination-info">
+                Menampilkan <span>${totalItems}</span> mahasiswa
+            </div>
+        `;
+        return;
+    }
+
+    let buttonsHtml = '';
+
+    // Tombol Previous
+    const prevDisabled = currentPage === 1 ? 'disabled' : '';
+    buttonsHtml += `
+        <button class="pagination-btn" onclick="goToPage(${currentPage - 1})" ${prevDisabled} title="Halaman Sebelumnya">
+            <i class="ph-bold ph-caret-left"></i>
+        </button>
+    `;
+
+    // Tombol Angka Halaman
+    for (let p = 1; p <= totalPages; p++) {
+        const activeClass = p === currentPage ? 'active' : '';
+        buttonsHtml += `
+            <button class="pagination-btn ${activeClass}" onclick="goToPage(${p})">
+                ${p}
+            </button>
+        `;
+    }
+
+    // Tombol Next
+    const nextDisabled = currentPage === totalPages ? 'disabled' : '';
+    buttonsHtml += `
+        <button class="pagination-btn" onclick="goToPage(${currentPage + 1})" ${nextDisabled} title="Halaman Berikutnya">
+            <i class="ph-bold ph-caret-right"></i>
+        </button>
+    `;
+
+    paginationContainer.innerHTML = `
+        <div class="pagination-info">
+            Menampilkan <span>${startItem} - ${endItem}</span> dari <strong>${totalItems}</strong> mahasiswa
+        </div>
+        <div class="pagination-nav">
+            ${buttonsHtml}
+        </div>
+    `;
+}
+
+/**
+ * Pindah ke halaman tertentu
+ */
+function goToPage(page) {
+    const totalPages = Math.ceil(allStudentsData.length / itemsPerPage);
+    if (page < 1 || page > totalPages) return;
+    currentPage = page;
+    renderTablePaginated();
+
+    // Scroll halus ke tabel
+    const dashboardSection = document.getElementById('data-mahasiswa');
+    if (dashboardSection) {
+        dashboardSection.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 /**

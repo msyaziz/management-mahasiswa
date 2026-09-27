@@ -231,11 +231,17 @@ a {
 /* --- Hero Section --- */
 .neo-hero {
     position: relative;
-    padding: 60px 5%;
+    padding: 100px 5% 60px 5%;
     min-height: calc(100vh - 73px);
     display: flex;
     align-items: center;
     overflow: hidden;
+    scroll-margin-top: 80px;
+}
+
+#cara-kerja,
+#data-mahasiswa {
+    scroll-margin-top: 80px;
 }
 
 .hero-content {
@@ -536,6 +542,74 @@ a {
     gap: 10px;
 }
 
+/* --- Pagination Styles (Neobrutalism) --- */
+.pagination-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.pagination-info {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--black);
+}
+
+.pagination-info span {
+    background-color: var(--amber-yellow);
+    padding: 2px 6px;
+    border: 2px solid var(--black);
+}
+
+.pagination-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--black);
+    background-color: var(--white);
+    border: var(--border-thick);
+    box-shadow: 3px 3px 0px var(--black);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.pagination-btn:hover:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px var(--black);
+    background-color: var(--sky-blue);
+}
+
+.pagination-btn.active {
+    background-color: var(--mint-green);
+    color: var(--black);
+    transform: translate(3px, 3px);
+    box-shadow: none;
+    border-color: var(--black);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
 /* --- Modals --- */
 .neo-modal-overlay {
     position: fixed;
@@ -746,33 +820,65 @@ a {
     .form-row { flex-direction: column; gap: 0; }
     
     /* Responsive Table as Cards */
+    .table-container {
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        overflow: visible;
+    }
+    .neo-table {
+        min-width: 100%;
+        display: block;
+    }
     .neo-table thead { display: none; }
-    .neo-table, .neo-table tbody, .neo-table tr, .neo-table td { display: block; width: 100%; }
+    .neo-table tbody { display: block; width: 100%; }
     .neo-table tr {
+        display: block;
+        width: 100%;
         margin-bottom: 20px;
         border: var(--border-thick);
-        box-shadow: var(--shadow-solid-sm);
+        box-shadow: var(--shadow-solid);
         background-color: var(--white) !important;
+        padding: 8px 0;
     }
     .neo-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
         text-align: right;
-        padding-left: 50%;
-        position: relative;
-        border-bottom: 1px solid #ddd;
+        padding: 12px 18px;
+        border-bottom: 1px dashed var(--black);
         border-right: none;
+        font-size: 0.95rem;
     }
-    .neo-table td:last-child { border-bottom: none; }
+    .neo-table td:last-child {
+        border-bottom: none;
+    }
     .neo-table td::before {
         content: attr(data-label);
-        position: absolute;
-        left: 15px;
-        width: 45%;
-        text-align: left;
         font-weight: 800;
         text-transform: uppercase;
         font-size: 0.85rem;
+        color: var(--black);
+        letter-spacing: 0.5px;
+        margin-right: 15px;
+        text-align: left;
+        flex-shrink: 0;
     }
-    .action-buttons { justify-content: flex-end; }
+    .action-buttons {
+        justify-content: flex-end;
+    }
+
+    /* Responsive Pagination */
+    .pagination-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .pagination-nav {
+        justify-content: center;
+    }
 }
 
 /* --- Spin & Disabled Utilities --- */

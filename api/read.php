@@ -45,8 +45,9 @@ $sql = "SELECT * FROM mahasiswa WHERE 1=1";
 $params = [];
 
 if ($search !== '') {
-    $sql .= " AND (npm LIKE :search OR nama_mahasiswa LIKE :search)";
-    $params[':search'] = "%{$search}%";
+    $sql .= " AND (npm LIKE :search_npm OR nama_mahasiswa LIKE :search_nama)";
+    $params[':search_npm'] = "%{$search}%";
+    $params[':search_nama'] = "%{$search}%";
 }
 
 if ($prodi !== '') {

@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Manajemen Mahasiswa</title>
-    
+
     <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
-    
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
     <!-- Navbar -->
@@ -26,8 +28,8 @@
         </div>
         <div class="nav-menu">
             <a href="#beranda" class="nav-link">Beranda</a>
+            <a href="#cara-kerja" class="nav-link">Cara Kerja</a>
             <a href="#data-mahasiswa" class="nav-link">Data Mahasiswa</a>
-            <a href="#tentang" class="nav-link">Cara Kerja</a>
         </div>
         <button class="neo-btn btn-primary" onclick="openModal('form-modal')">
             <i class="ph-bold ph-plus"></i> Tambah Mahasiswa
@@ -40,8 +42,8 @@
         <!-- Mobile Menu inside Navbar -->
         <div class="mobile-menu">
             <a href="#beranda" class="nav-link" onclick="closeMobileMenu()">Beranda</a>
+            <a href="#cara-kerja" class="nav-link" onclick="closeMobileMenu()">Cara Kerja</a>
             <a href="#data-mahasiswa" class="nav-link" onclick="closeMobileMenu()">Data Mahasiswa</a>
-            <a href="#tentang" class="nav-link" onclick="closeMobileMenu()">Cara Kerja</a>
             <button class="neo-btn btn-primary" onclick="openModal('form-modal'); closeMobileMenu()">
                 <i class="ph-bold ph-plus"></i> Tambah Mahasiswa
             </button>
@@ -55,7 +57,8 @@
                 KELOLA DATA <span class="highlight highlight-mint">MAHASISWA</span> LEBIH MUDAH
             </h1>
             <p class="hero-desc">
-                Sistem Manajemen Database Mahasiswa dengan antarmuka yang modern, cepat, dan mudah digunakan. Kelola data akademik tanpa pusing.
+                Sistem Manajemen Database Mahasiswa dengan antarmuka yang modern, cepat, dan mudah digunakan. Kelola
+                data akademik tanpa pusing.
             </p>
             <div class="hero-actions">
                 <a href="#data-mahasiswa" class="neo-btn btn-primary btn-large">
@@ -73,12 +76,12 @@
     </header>
 
     <!-- Cara Kerja Section -->
-    <section class="neo-steps-section" id="tentang">
+    <section class="neo-steps-section" id="cara-kerja">
         <div class="section-header">
             <h2><span class="highlight highlight-pink">CARA</span> KERJA</h2>
             <p>Tiga langkah mudah mengelola data mahasiswa</p>
         </div>
-        
+
         <div class="steps-grid">
             <div class="step-card">
                 <div class="step-number bg-yellow">1</div>
@@ -102,7 +105,7 @@
     <main class="neo-dashboard" id="data-mahasiswa">
         <div class="dashboard-header">
             <h2>DATABASE <span class="highlight highlight-blue">MAHASISWA</span></h2>
-            
+
             <div class="stats-container">
                 <div class="stat-card">
                     <i class="ph-fill ph-users bg-pink stat-icon"></i>
@@ -126,7 +129,7 @@
                 <i class="ph-bold ph-magnifying-glass"></i>
                 <input type="text" id="search-input" class="neo-input" placeholder="Cari NPM atau Nama...">
             </div>
-            
+
             <div class="filter-group">
                 <select id="filter-prodi" class="neo-select">
                     <option value="">Semua Program Studi</option>
@@ -160,6 +163,11 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-wrapper" id="pagination-controls">
+            <!-- Di-generate secara dinamis oleh JavaScript -->
+        </div>
     </main>
 
     <!-- Modal Form Tambah Mahasiswa -->
@@ -175,12 +183,14 @@
                 <form id="mahasiswa-form">
                     <div class="form-group">
                         <label class="neo-label" for="add-npm">NPM</label>
-                        <input type="text" id="add-npm" name="npm" class="neo-input" placeholder="Contoh: 25081010121" required maxlength="20">
+                        <input type="text" id="add-npm" name="npm" class="neo-input" placeholder="Contoh: 25081010121"
+                            required maxlength="20">
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="neo-label" for="add-nama">Nama Lengkap</label>
-                        <input type="text" id="add-nama" name="nama_mahasiswa" class="neo-input" placeholder="Masukkan nama lengkap" required maxlength="100">
+                        <input type="text" id="add-nama" name="nama_mahasiswa" class="neo-input"
+                            placeholder="Masukkan nama lengkap" required maxlength="100">
                     </div>
 
                     <div class="form-row">
@@ -210,16 +220,19 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="neo-label" for="add-prodi">Program Studi</label>
-                            <input type="text" id="add-prodi" name="program_studi" class="neo-input" placeholder="Contoh: Informatika" required maxlength="100">
+                            <input type="text" id="add-prodi" name="program_studi" class="neo-input"
+                                placeholder="Contoh: Informatika" required maxlength="100">
                         </div>
                         <div class="form-group">
                             <label class="neo-label" for="add-angkatan">Angkatan</label>
-                            <input type="number" id="add-angkatan" name="angkatan" class="neo-input" placeholder="Contoh: 2026" required min="1990" max="2100">
+                            <input type="number" id="add-angkatan" name="angkatan" class="neo-input"
+                                placeholder="Contoh: 2026" required min="1990" max="2100">
                         </div>
                     </div>
 
                     <div class="modal-footer" style="padding-left: 0; padding-right: 0; padding-bottom: 0;">
-                        <button type="button" class="neo-btn btn-white" onclick="closeModal('form-modal')">Batal</button>
+                        <button type="button" class="neo-btn btn-white"
+                            onclick="closeModal('form-modal')">Batal</button>
                         <button type="submit" class="neo-btn btn-primary" id="btn-save-add">
                             <i class="ph-bold ph-floppy-disk"></i> Simpan Data
                         </button>
@@ -246,10 +259,11 @@
                         <label class="neo-label" for="edit-npm">NPM</label>
                         <input type="text" id="edit-npm" name="npm" class="neo-input" required maxlength="20">
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="neo-label" for="edit-nama">Nama Lengkap</label>
-                        <input type="text" id="edit-nama" name="nama_mahasiswa" class="neo-input" required maxlength="100">
+                        <input type="text" id="edit-nama" name="nama_mahasiswa" class="neo-input" required
+                            maxlength="100">
                     </div>
 
                     <div class="form-row">
@@ -277,16 +291,19 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="neo-label" for="edit-prodi">Program Studi</label>
-                            <input type="text" id="edit-prodi" name="program_studi" class="neo-input" required maxlength="100">
+                            <input type="text" id="edit-prodi" name="program_studi" class="neo-input" required
+                                maxlength="100">
                         </div>
                         <div class="form-group">
                             <label class="neo-label" for="edit-angkatan">Angkatan</label>
-                            <input type="number" id="edit-angkatan" name="angkatan" class="neo-input" required min="1990" max="2100">
+                            <input type="number" id="edit-angkatan" name="angkatan" class="neo-input" required
+                                min="1990" max="2100">
                         </div>
                     </div>
 
                     <div class="modal-footer" style="padding-left: 0; padding-right: 0; padding-bottom: 0;">
-                        <button type="button" class="neo-btn btn-white" onclick="closeModal('edit-modal')">Batal</button>
+                        <button type="button" class="neo-btn btn-white"
+                            onclick="closeModal('edit-modal')">Batal</button>
                         <button type="submit" class="neo-btn btn-yellow" id="btn-save-edit">
                             <i class="ph-bold ph-check"></i> Update Data
                         </button>
@@ -306,7 +323,8 @@
                 </button>
             </div>
             <div class="modal-body text-center">
-                <i class="ph-duotone ph-warning-circle text-pink" style="font-size: 4rem; margin-bottom: 1rem; display: block;"></i>
+                <i class="ph-duotone ph-warning-circle text-pink"
+                    style="font-size: 4rem; margin-bottom: 1rem; display: block;"></i>
                 <p id="delete-confirm-text">Data mahasiswa akan dihapus permanen. Anda yakin?</p>
             </div>
             <div class="modal-footer justify-center">
@@ -331,4 +349,5 @@
 
     <script src="assets/js/app.js"></script>
 </body>
+
 </html>
