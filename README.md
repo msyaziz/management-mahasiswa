@@ -31,3 +31,42 @@ management-mahasiswa/
 └── index.html            # Halaman utama aplikasi (UI)
 
 
+```
+---
+
+## 🚀 Panduan Instalasi Lokal (Menggunakan XAMPP)
+
+Berikut adalah langkah-langkah lengkap untuk menjalankan proyek ini di komputer lokal Anda menggunakan XAMPP:
+
+1. **Instalasi PHP & MariaDB:**
+* Pastikan Anda sudah mengunduh dan menginstal **XAMPP** (yang di dalamnya sudah mencakup PHP versi 8.4 dan MariaDB).
+* Nyalakan modul **Apache** dan **MySQL** melalui XAMPP Control Panel.
+
+
+2. **Buat Database:**
+* Buka browser dan akses **phpMyAdmin** (`http://localhost/phpmyadmin`).
+* Buat database baru (misalnya `db_mahasiswa`). Ingat nama database, *username* (`root`), *password* (biasanya kosong secara *default*), *host* (`localhost`), dan *port* (`3306`).
+* Pilih database tersebut, klik menu **Import**, unggah file `database/mahasiswa.sql` dari folder proyek Anda, lalu klik **Go**.
+
+
+3. **Konfigurasi `db.php`:**
+* Buka file `api/db.php` menggunakan teks editor.
+* Sesuaikan konfigurasi koneksi database dengan pengaturan lokal Anda:
+```php
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db   = "db_mahasiswa";
+
+```
+
+4. **Pindahkan Folder Proyek:**
+* Salin seluruh folder proyek `management-mahasiswa` ke dalam direktori *Document Root* XAMPP (biasanya di `C:\xampp\htdocs\`).
+
+
+5. **Jalankan Aplikasi:**
+* Buka browser Anda dan akses melalui URL: `http://localhost/management-mahasiswa`
+
+---
+```
+```
