@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // --------------------------------------------------------
 // Konfigurasi Database (Sesuaikan dengan server Anda)
 // --------------------------------------------------------
-$db_host = getenv('DB_HOST') ?: 'db';
-$db_port = getenv('DB_PORT') ?: '3306';
-$db_name = getenv('DB_NAME') ?: 'mahasiswasw';
-$db_user = getenv('DB_USER') ?: 'root';
-$db_pass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : 'rootpassword';
+$db_host = getenv('DB_HOST') ?: ''; //MASUKAN IP DISINI
+$db_port = getenv('DB_PORT') ?: '3306'; //MASUKAN PORT DISINI
+$db_name = getenv('DB_NAME') ?: ''; //MASUKAN NAMA DATABASE DISINI
+$db_user = getenv('DB_USER') ?: ''; //MASUKAN USERNAME DISINI
+$db_pass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : '';
 
 // --------------------------------------------------------
 // Inisialisasi Koneksi PDO
